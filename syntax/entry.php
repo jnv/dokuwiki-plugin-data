@@ -4,8 +4,6 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Andreas Gohr <andi@splitbrain.org>
  */
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
 
 /**
  * Class syntax_plugin_data_entry
@@ -165,7 +163,7 @@ class syntax_plugin_data_entry extends DokuWiki_Syntax_Plugin {
         $ret .= '<div class="inline dataplugin_entry ' . $data['classes'] . '"><dl>';
         $class_names = array();
         foreach($data['data'] as $key => $val) {
-            if($val == '' || !count($val)) continue;
+            if($val == '' || is_null($val) || (is_array($val) && count($val) == 0)) continue;
             $type = $data['cols'][$key]['type'];
             if(is_array($type)) {
                 $type = $type['type'];
